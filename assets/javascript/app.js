@@ -1,3 +1,5 @@
+let timeoutAnswer;
+
 function triviaQuestion(question,isYesNoQuestion, correctAnswer, answers = []){
     this.question = question;
     this.isYesNoQuestion = isYesNoQuestion;
@@ -18,11 +20,13 @@ let trivia = {
     questionsPool: [], // includes originally all questions, and they are removed one by one (to avoid repetition)
     state: "", // to keep where we are in the workflow, it will be a cycle most likely
     checkAnswer: function(){},
+    // cannot use this in nextquestion because of the recursivity on the timeout, which changes the scope each time
     nextQuestion: function(){
-        let index = getRandomInt(this.questionsPool.length);
-        this.currentQuestion = this.questionsPool[index];
-        this.questionsPool.splice(index,1);
-        this.displayCurrentQuestion();
+        let index = getRandomInt(trivia.questionsPool.length);
+        trivia.currentQuestion = trivia.questionsPool[index];
+        trivia.questionsPool.splice(index,1);
+        trivia.displayCurrentQuestion();
+        timeoutAnswer = window.setTimeout(function(){trivia.validateAnswer("");},3000);
     },
     init: function(){
         this.questionsPool = [luffy,bakuman,ichigo,sasuke]; // may be replaced by a loop later by naming the question questioni maybe
@@ -31,7 +35,6 @@ let trivia = {
     displayCurrentQuestion: function(){
         $('#question').empty().append(this.currentQuestion.question);
         if (this.currentQuestion.isYesNoQuestion){
-            console.log('run yes');
             $('#true').show();
             $('#false').show();
             $('#answer1').hide();
@@ -39,7 +42,6 @@ let trivia = {
             $('#answer3').hide();
             $('#answer4').hide();
         } else {
-            console.log('run choice');
             $('#true').hide();
             $('#false').hide();
             $('#answer1').show().empty().append(this.currentQuestion.answers[0]);
@@ -49,17 +51,26 @@ let trivia = {
         }
     },
     validateAnswer: function(answer){
-        if (answer === this.currentQuestion.correctAnswer){
+        trivia.state = "validating";
+        if (answer === trivia.currentQuestion.correctAnswer){
             player.areAnswersCorrect.push(true);
+            console.log('congrats!');
+            window.setTimeout(trivia.goToNextQuestion,2000);
         } else {
             player.areAnswersCorrect.push(false);
+            console.log('Too bad...');
+            window.setTimeout(trivia.goToNextQuestion,2000);
         }
+    },
+    goToNextQuestion: function(){
         player.displayCurrentScore();
-        if (this.questionsPool.length === 0){
+        if (trivia.questionsPool.length === 0){
+            trivia.state = "finished";
             console.log("game finished");
         } else {
-            this.nextQuestion();
+            trivia.nextQuestion();
         }
+        trivia.state = "waitingForAnswer";
     },
 }
 
@@ -70,7 +81,6 @@ let player = {
         $('#totalAnswers').empty().append(this.areAnswersCorrect.length);
         let nbCorrectAnswers = 0;
         for (let i = 0; i < this.areAnswersCorrect.length; i++){
-            console.log(this.areAnswersCorrect[i]);
             if (this.areAnswersCorrect[i]){
                 nbCorrectAnswers++;
             }
@@ -99,6 +109,7 @@ $( document ).ready(function(){
     $('#true').click(function(){
         if (trivia.state === "waitingForAnswer"){
             player.currentAnswer = true;
+            window.clearTimeout(timeoutAnswer);
             trivia.validateAnswer(player.currentAnswer);
         }
     });
@@ -106,6 +117,7 @@ $( document ).ready(function(){
     $('#false').click(function(){
         if (trivia.state === "waitingForAnswer"){
             player.currentAnswer = false;
+            window.clearTimeout(timeoutAnswer);
             trivia.validateAnswer(player.currentAnswer);
         }
     });
@@ -114,6 +126,7 @@ $( document ).ready(function(){
         $('#answer' + i).click(function(){
             if (trivia.state === "waitingForAnswer"){
                 player.currentAnswer = $('#answer' + i).text();
+                window.clearTimeout(timeoutAnswer);
                 trivia.validateAnswer(player.currentAnswer);
             }
         }); 
