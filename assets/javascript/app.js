@@ -26,7 +26,7 @@ let trivia = {
         trivia.currentQuestion = trivia.questionsPool[index];
         trivia.questionsPool.splice(index,1);
         trivia.displayCurrentQuestion();
-        timeoutAnswer = window.setTimeout(function(){trivia.validateAnswer("");},3000);
+        trivia.answerCountDown(8);
     },
     init: function(){
         this.questionsPool = [luffy,bakuman,ichigo,sasuke]; // may be replaced by a loop later by naming the question questioni maybe
@@ -72,7 +72,17 @@ let trivia = {
         }
         trivia.state = "waitingForAnswer";
     },
+    answerCountDown: function(n){
+        $('#timer').empty().append(n);
+        n--;
+        if(n > 0){
+        timeoutAnswer = setTimeout(function(){trivia.answerCountDown(n)},1000);
+        } else {
+            trivia.validateAnswer("");
+        }
+    }
 }
+
 
 let player = {
     currentAnswer: "",
@@ -110,6 +120,7 @@ $( document ).ready(function(){
         if (trivia.state === "waitingForAnswer"){
             player.currentAnswer = true;
             window.clearTimeout(timeoutAnswer);
+            $('#timer').empty();
             trivia.validateAnswer(player.currentAnswer);
         }
     });
@@ -118,6 +129,7 @@ $( document ).ready(function(){
         if (trivia.state === "waitingForAnswer"){
             player.currentAnswer = false;
             window.clearTimeout(timeoutAnswer);
+            $('#timer').empty();
             trivia.validateAnswer(player.currentAnswer);
         }
     });
@@ -127,6 +139,7 @@ $( document ).ready(function(){
             if (trivia.state === "waitingForAnswer"){
                 player.currentAnswer = $('#answer' + i).text();
                 window.clearTimeout(timeoutAnswer);
+                $('#timer').empty();
                 trivia.validateAnswer(player.currentAnswer);
             }
         }); 
