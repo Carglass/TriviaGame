@@ -19,8 +19,9 @@ let trivia = {
     state: "", // to keep where we are in the workflow, it will be a cycle most likely
     checkAnswer: function(){},
     nextQuestion: function(){
-        this.currentQuestion = this.questionsPool[getRandomInt(this.questionsPool.length)];
-        console.log(this.currentQuestion);
+        let index = getRandomInt(this.questionsPool.length);
+        this.currentQuestion = this.questionsPool[index];
+        this.questionsPool.splice(index,1);
         this.displayCurrentQuestion();
     },
     init: function(){
@@ -28,7 +29,7 @@ let trivia = {
         this.state = "waitingForAnswer";
     },
     displayCurrentQuestion: function(){
-        $('#question').append(this.currentQuestion.question);
+        $('#question').empty().append(this.currentQuestion.question);
         if (this.currentQuestion.isYesNoQuestion){
             console.log('run yes');
             $('#true').show();
@@ -41,17 +42,23 @@ let trivia = {
             console.log('run choice');
             $('#true').hide();
             $('#false').hide();
-            $('#answer1').show().append(this.currentQuestion.answers[0]);
-            $('#answer2').show().append(this.currentQuestion.answers[1]);
-            $('#answer3').show().append(this.currentQuestion.answers[2]);
-            $('#answer4').show().append(this.currentQuestion.answers[3]);
+            $('#answer1').show().empty().append(this.currentQuestion.answers[0]);
+            $('#answer2').show().empty().append(this.currentQuestion.answers[1]);
+            $('#answer3').show().empty().append(this.currentQuestion.answers[2]);
+            $('#answer4').show().empty().append(this.currentQuestion.answers[3]);
         }
     },
     validateAnswer: function(answer){
         if (answer === this.currentQuestion.correctAnswer){
-            return true;
+            player.areAnswersCorrect.push(true);
         } else {
-            return false;
+            player.areAnswersCorrect.push(false);
+        }
+        player.displayCurrentScore();
+        if (this.questionsPool.length === 0){
+            console.log("game finished");
+        } else {
+            this.nextQuestion();
         }
     },
 }
@@ -59,6 +66,17 @@ let trivia = {
 let player = {
     currentAnswer: "",
     areAnswersCorrect: [], //we keep this array with booleans to count the score
+    displayCurrentScore: function(){
+        $('#totalAnswers').empty().append(this.areAnswersCorrect.length);
+        let nbCorrectAnswers = 0;
+        for (let i = 0; i < this.areAnswersCorrect.length; i++){
+            console.log(this.areAnswersCorrect[i]);
+            if (this.areAnswersCorrect[i]){
+                nbCorrectAnswers++;
+            }
+        }
+        $('#goodAnswers').empty().append(nbCorrectAnswers);
+    },
 }
 
 let luffy = new triviaQuestion("What is the name of the captain in One Piece?",false,'Luffy',['Luffy','Zorro','Sandy','Franky']);
@@ -81,14 +99,14 @@ $( document ).ready(function(){
     $('#true').click(function(){
         if (trivia.state === "waitingForAnswer"){
             player.currentAnswer = true;
-            console.log(trivia.validateAnswer(player.currentAnswer));
+            trivia.validateAnswer(player.currentAnswer);
         }
     });
 
     $('#false').click(function(){
         if (trivia.state === "waitingForAnswer"){
             player.currentAnswer = false;
-            console.log(trivia.validateAnswer(player.currentAnswer));
+            trivia.validateAnswer(player.currentAnswer);
         }
     });
 
@@ -96,7 +114,7 @@ $( document ).ready(function(){
         $('#answer' + i).click(function(){
             if (trivia.state === "waitingForAnswer"){
                 player.currentAnswer = $('#answer' + i).text();
-                console.log(trivia.validateAnswer(player.currentAnswer));
+                trivia.validateAnswer(player.currentAnswer);
             }
         }); 
     }
