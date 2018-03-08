@@ -78,7 +78,8 @@ let trivia = {
         if(n > 0){
         timeoutAnswer = setTimeout(function(){trivia.answerCountDown(n)},1000);
         } else {
-            trivia.validateAnswer("");
+            timeoutAnswer = setTimeout(function(){trivia.validateAnswer("");},1000);
+            // trivia.validateAnswer("");
         }
     }
 }

@@ -1,0 +1,485 @@
+.row{
+    margin-top: 20px;
+}
+
+/* Display */
+
+.d-f
+{
+    display: flex;
+}
+
+.d-b
+{
+    display: block;
+}
+
+.fxd-rr{
+    flex-direction: row-reverse;
+}
+
+.jc-sa
+{
+    justify-content: space-around;
+}
+
+.jc-sb
+{
+    justify-content: space-between
+}
+
+.ai-c
+{
+    align-items: center;
+}
+
+.ai-fs
+{
+    align-items: flex-start;
+}
+
+.ac-fs
+{
+    align-content: flex-start;
+}
+
+.ac-c
+{
+    align-content: center;
+}
+
+.fxw-w
+{
+    flex-wrap: wrap;
+}
+
+.pos-r
+{
+    position: relative;
+}
+
+.pos-a
+{
+    position: absolute;
+}
+
+.b-0
+{
+    bottom: 0;
+}
+
+.fl-l
+{
+    float:left;
+}
+
+/* X-Axis */
+
+.w-100
+{
+    width: 100%;
+}
+
+.w-25
+{
+    width: 25%;
+}
+
+.w-40
+{
+    width: 40%;
+}
+
+.w-65
+{
+    width: 65%;
+}
+
+.w-80{
+    width: 80%;
+}
+
+/* I used percentage instead of pixels for section and aside as it can scale down on smaller screens */
+
+.w-80
+{
+    width: 80%;
+}
+
+.w-960px
+{
+    width: 960px;
+}
+
+/* Y-axis */
+
+.h-50px
+{
+    height: 50px;
+}
+
+.h-70px
+{
+    height: 70px;
+}
+
+.h-150px
+{
+    height: 150px;
+}
+
+.va-m
+{
+    vertical-align: middle;
+}
+
+.lh-50px
+{
+    line-height: 50px;
+}
+
+.lh-60px{
+    line-height: 60px;
+}
+
+.lh-70px
+{
+    line-height: 70px;
+}
+
+.lh-100{
+    line-height: 100%;
+}
+
+.ta-c
+{
+    text-align: center;
+}
+
+/* Padding */
+.p-5px
+{
+    padding: 5px;
+}
+
+.p-10px-20px
+{
+    padding: 10px 20px;
+}
+
+.pl-30px
+{
+    padding-left: 30px;
+}
+
+.pr-30px
+{
+    padding-right: 30px;
+}
+
+.pt-15px
+{
+    padding-top: 15px;
+}
+
+.pb-15px
+{
+    padding-bottom: 15px;
+}
+
+.p-0{
+    padding: none;
+}
+
+/* Border */
+
+.bd-n
+{
+    border: none;
+}
+
+.bdw-2px{
+    border-width: 2px;
+}
+
+.bdc-bl-dk{
+    border-color: #005cb2;
+}
+
+.bds-s{
+    border-style: solid;
+}
+
+.bdtw-10px{
+    border-top-width: 10px;
+}
+
+.bdtc-bl-dk{
+    border-top-color: #005cb2;
+}
+
+.bdts-s{
+    border-top-style: solid;
+}
+
+.br-50{
+    border-radius: 50%;
+}
+
+/* Margins */
+
+.m-a
+{
+    margin: auto;
+}
+
+.m-5px
+{
+    margin: 5px;
+}
+
+.mt-0px{
+    margin-top: 0px;
+}
+
+.mt-30px
+{
+    margin-top: 30px;
+}
+
+.mt-20px
+{
+    margin-top: 20px;
+}
+
+.mb-10px
+{
+    margin-bottom: 10px;
+}
+
+.mb-20px
+{
+    margin-bottom: 20px;
+}
+
+.mb-30px
+{
+    margin-bottom: 30px;
+}
+
+.mr-20px
+{
+    margin-right: 20px;
+}
+
+/* Colors */
+
+.bgc-wh
+{
+    background-color: white;
+}
+
+.c-wh
+{
+    color: white;
+}
+
+.bgc-bl{
+    background-color: #1e88e5;
+}
+
+.bgc-bl-lt{
+    background-color: #6ab7ff;
+}
+
+.bgc-bl-dk{
+    background-color: #005cb2;
+}
+
+.bgc-or{
+    background-color: #ff8f00;
+}
+
+.bgc-or-lt{
+    background-color: #ffc046;
+}
+
+.bgc-or-dk{
+    background-color: #c56000;
+}
+
+.op-9
+{
+    opacity: 0.9;
+}
+
+
+
+/* Fonts */
+
+.td-n
+{
+    text-decoration: none;
+}
+
+.fz-1em
+{
+    font-size: 1em;
+}
+
+.fz-1_2em
+{
+    font-size: 1.2em;
+}
+
+.fz-1_4em
+{
+    font-size: 1.4em;
+}
+
+.fz-2em
+{
+    font-size: 2em;
+}
+
+.fw-b
+{
+    font-weight: bold;
+}
+
+/* Effects */
+
+.bxsh
+{
+    box-shadow: 0px 2px #cccccc;
+}
+
+.of-c
+{
+    object-fit: cover;
+}
+
+/* Header */
+
+.vRule
+{
+    border-right: 1px solid #cccccc;
+}
+
+.horizontalBarSection
+{
+    height: 3px;
+    background-color: #cccccc;
+    border: 0;
+}
+
+.horizontalBarAside
+{
+    height: 1px;
+    background-color: #cccccc;
+    border: 0;
+}
+
+/* Footer */
+.footer
+{
+    box-shadow: 0px -4px #4aaaac;
+}
+
+/* Form */
+
+::-webkit-input-placeholder
+{
+    color: #aaaaaa;
+}
+
+@media screen and (max-width: 980px){
+    .md-w-100{
+        width:100%;
+    }
+
+    .md-wrap{
+        flex-wrap: wrap;
+    }
+
+    .md-w-30{
+        width: 30%;
+    }
+
+    .md-w-40{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .sm-w-100{
+        width:100%;
+    }
+
+    .sm-w-40{
+        width: 40%;
+    }
+
+    .sm-wrap{
+        flex-wrap: wrap;
+    }
+
+    .sm-jc-ar{
+        justify-content: space-around;
+    }
+    
+    .sm-mt-20px{
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 640px){
+    .xs-w-100{
+        width:100%;
+    }
+
+    .xs-w-30{
+        width: 30%;
+    }
+
+    .xs-wrap{
+        flex-wrap: wrap;
+    }
+
+    .xs-h-30{
+        height: 30px;
+    }
+
+    .xs-d-f{
+        display: flex;
+    }
+
+    .xs-fd-c{
+        flex-direction: column
+    }
+
+    .xs-jc-c{
+        justify-content: center;
+    }
+
+    .xs-ta-c{
+        text-align: center;
+    }
+
+    .xs-mt-20px{
+        margin-top: 20px;
+    }
+
+    /* placed before other margins, as it acts as a reset */
+    .xs-m-0{
+        margin:0;
+    }
+
+    .xs-mb-20px{
+        margin-bottom: 20px;
+    }
+    
+    .xs-d-b{
+        display: block;
+    }
+}

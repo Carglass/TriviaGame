@@ -5,29 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Trivia Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script
+    <!-- <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
+
     <script src="./assets/javascript/app.js"></script>
 </head>
 <body>
-    
-    <div id="question"></div>
-    <div id="answers">
-        <div id="true" hidden>True</div>
-        <div id="false" hidden>False</div>
-        <div id="answer1" hidden></div>
-        <div id="answer2" hidden></div>
-        <div id="answer3" hidden></div>
-        <div id="answer4" hidden></div>
-    </div> 
-    <div><span id="goodAnswers">0</span> good answers out of <span id="totalAnswers">0</span> questions</div>
-    <h1 id="timer"></h1>
+    <div class="container">
+        <div class="row d-flex justify-content-between bgc-bl mt-0px bdtw-10px bdtc-bl-dk bdts-s h-70px">
+            <div class="brand col-3 bgc-or"><h1>Manga Trivia</h1></div>
+            <div class="col-3 d-f justify-content-around">
+                <div id="timer" class="w-25 br-50 bgc-or-lt ta-c lh-60px va-m fz-2em fw-b"></div>
+            </div>
+            <div class="col-3 d-f fxd-rr p-0"><div class="bgc-or-lt lh-60px w-25 va-m fw-b ta-c"><span id="goodAnswers">0</span> / <span id="totalAnswers">0</span></div></div>
+        </div>
+        <div class="row">
+            <div id="question" class="col-12 bgc-bl-lt bdw-2px bdc-bl-dk bds-s"></div>
+        </div>
+        <div class="row d-flex justify-content-between">
+            <div id="true" class="col-12 bgc-bl-lt bdw-2px bdc-bl-dk bds-s">True</div>
+            <div id="false" class="col-12 bgc-bl-lt bdw-2px bdc-bl-dk bds-s mt-20px">False</div>
+            <div id="answer1" class="col-5 bgc-bl-lt bdw-2px bdc-bl-dk bds-s"></div>
+            <div id="answer2" class="col-5 bgc-bl-lt bdw-2px bdc-bl-dk bds-s"></div>
+            <div id="answer3" class="col-5 bgc-bl-lt bdw-2px bdc-bl-dk bds-s mt-20px"></div>
+            <div id="answer4" class="col-5 bgc-bl-lt bdw-2px bdc-bl-dk bds-s mt-20px"></div>
+        </div>
+    </div>
 </body>
 </html>
