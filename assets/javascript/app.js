@@ -1,4 +1,5 @@
 let timeoutAnswer;
+let timeoutModal;
 
 function triviaQuestion(question,isYesNoQuestion, correctAnswer, answers = []){
     this.question = question;
@@ -55,22 +56,34 @@ let trivia = {
         if (answer === trivia.currentQuestion.correctAnswer){
             player.areAnswersCorrect.push(true);
             console.log('congrats!');
-            window.setTimeout(trivia.goToNextQuestion,2000);
+            $("#questionScore").modal('show');
+            $("#questionScoreTitle").empty().append('Congrats!');
+            $("#questionScoreText").empty().append('You got it right!');
+            timeoutModal = window.setTimeout(trivia.goToNextQuestion,5000);
         } else {
             player.areAnswersCorrect.push(false);
             console.log('Too bad...');
-            window.setTimeout(trivia.goToNextQuestion,2000);
+            $("#questionScore").modal('show');
+            $("#questionScoreTitle").empty().append('Too bad...');
+            $("#questionScoreText").empty().append('The good answer was ' + trivia.currentQuestion.correctAnswer);
+            timeoutModal = window.setTimeout(trivia.goToNextQuestion,5000);
         }
     },
     goToNextQuestion: function(){
         player.displayCurrentScore();
+        $("#questionScore").modal('hide');
         if (trivia.questionsPool.length === 0){
             trivia.state = "finished";
             console.log("game finished");
+            $("#questionScore").modal('show');
+            $("#questionScoreTitle").empty().append(player.displayFinalScore());
+            $("#questionScoreText").empty().append('Pretty impressive!');
+            $('#dismissModal').empty().append('Restart');
         } else {
             trivia.nextQuestion();
+            trivia.state = "waitingForAnswer";
         }
-        trivia.state = "waitingForAnswer";
+        
     },
     answerCountDown: function(n){
         $('#timer').empty().append(n);
@@ -81,6 +94,16 @@ let trivia = {
             timeoutAnswer = setTimeout(function(){trivia.validateAnswer("");},1000);
             // trivia.validateAnswer("");
         }
+    },
+    reset: function(){
+        $('#dismissModal').empty().append('Skip');
+        $('#questionScore').modal('hide');
+        $('#goodAnswers').empty().append('0');
+        $('#totalAnswers').empty().append('0');
+        trivia.init();
+        trivia.nextQuestion();
+        player.init();
+        
     }
 }
 
@@ -97,6 +120,19 @@ let player = {
             }
         }
         $('#goodAnswers').empty().append(nbCorrectAnswers);
+    },
+    displayFinalScore: function(){
+        let nbCorrectAnswers = 0;
+        for (let i = 0; i < this.areAnswersCorrect.length; i++){
+            if (this.areAnswersCorrect[i]){
+                nbCorrectAnswers++;
+            }
+        }
+        return "Final score: " + nbCorrectAnswers + " / " + player.areAnswersCorrect.length;
+    },
+    init: function(){
+        player.currentAnswer = "";
+        player.areAnswersCorrect = [];
     },
 }
 
@@ -145,6 +181,15 @@ $( document ).ready(function(){
             }
         }); 
     }
+
+    $('#dismissModal').click(function(){
+        if (trivia.state === "finished") {
+            trivia.reset();
+        } else {
+            window.clearTimeout(timeoutModal);
+            trivia.goToNextQuestion();
+        }
+    })
 
 });
 

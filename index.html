@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Trivia Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
     <!-- <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -17,26 +23,50 @@
 
     <script src="./assets/javascript/app.js"></script>
 </head>
+
 <body>
     <div class="container">
-        <div class="row d-flex justify-content-between bgc-bl mt-0px bdtw-10px bdtc-bl-dk bdts-s h-70px">
-            <div class="brand col-3 bgc-or"><h1>Manga Trivia</h1></div>
-            <div class="col-3 d-f justify-content-around">
-                <div id="timer" class="w-25 br-50 bgc-or-lt ta-c lh-60px va-m fz-2em fw-b"></div>
+        <div class="row d-flex justify-content-between bgc-pr mt-0px bdtw-10px bdtc-pr-dk bdts-s h-70px brb-10px">
+            <div class="brand col-3 bgc-pr-lt brbl-10px c-wh">
+                <h1>Manga Trivia</h1>
             </div>
-            <div class="col-3 d-f fxd-rr p-0"><div class="bgc-or-lt lh-60px w-25 va-m fw-b ta-c"><span id="goodAnswers">0</span> / <span id="totalAnswers">0</span></div></div>
+            <div class="w-100px h-100px d-f justify-content-around">
+                <div id="timer" class="w-100 br-50 bgc-sc ta-c lh-100px va-m fz-3em fw-b"></div>
+            </div>
+            <div class="col-3 d-f fxd-rr p-0 brbr-10px">
+                <div class="bgc-pr-lt lh-60px w-40 va-m fw-b ta-c brbr-10px c-wh">Score: 
+                    <span id="goodAnswers">0</span> /
+                    <span id="totalAnswers">0</span>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div id="question" class="col-12 bgc-bl-lt bdw-2px bdc-bl-dk bds-s"></div>
+        <div class="row mt-50px">
+            <div id="question" class="col-12 bgc-pr-lt lh-50px br-10px fw-b c-wh"></div>
         </div>
-        <div class="row d-flex justify-content-between">
-            <div id="true" class="col-12 bgc-bl-lt bdw-2px bdc-bl-dk bds-s">True</div>
-            <div id="false" class="col-12 bgc-bl-lt bdw-2px bdc-bl-dk bds-s mt-20px">False</div>
-            <div id="answer1" class="col-5 bgc-bl-lt bdw-2px bdc-bl-dk bds-s"></div>
-            <div id="answer2" class="col-5 bgc-bl-lt bdw-2px bdc-bl-dk bds-s"></div>
-            <div id="answer3" class="col-5 bgc-bl-lt bdw-2px bdc-bl-dk bds-s mt-20px"></div>
-            <div id="answer4" class="col-5 bgc-bl-lt bdw-2px bdc-bl-dk bds-s mt-20px"></div>
+        <div class="row mt-20px d-flex justify-content-between">
+            <div id="true" class="col-12 bgc-pr-lt lh-50px br-10px c-wh">True</div>
+            <div id="false" class="col-12 bgc-pr-lt mt-20px lh-50px br-10px c-wh">False</div>
+            <div id="answer1" class="col-5 bgc-pr-lt lh-50px br-10px c-wh"></div>
+            <div id="answer2" class="col-5 bgc-pr-lt lh-50px br-10px c-wh"></div>
+            <div id="answer3" class="col-5 bgc-pr-lt mt-20px lh-50px br-10px c-wh"></div>
+            <div id="answer4" class="col-5 bgc-pr-lt mt-20px lh-50px br-10px c-wh"></div>
+        </div>
+    </div>
+    <div id="questionScore" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bgc-pr-lt c-wh">
+                <div class="modal-header">
+                    <h5 id="questionScoreTitle" class="modal-title">Congrats!</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="questionScoreText">You got it right!</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="dismissModal" type="button" class="btn bgc-sc" >Skip</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
