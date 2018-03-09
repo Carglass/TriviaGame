@@ -23,11 +23,11 @@ let trivia = {
     checkAnswer: function(){},
     // cannot use this in nextquestion because of the recursivity on the timeout, which changes the scope each time
     nextQuestion: function(){
-        let index = getRandomInt(trivia.questionsPool.length);
-        trivia.currentQuestion = trivia.questionsPool[index];
-        trivia.questionsPool.splice(index,1);
-        trivia.displayCurrentQuestion();
-        trivia.answerCountDown(8);
+        let index = getRandomInt(this.questionsPool.length);
+        this.currentQuestion = this.questionsPool[index];
+        this.questionsPool.splice(index,1);
+        this.displayCurrentQuestion();
+        this.answerCountDown(8);
     },
     init: function(){
         this.questionsPool = [luffy,bakuman,ichigo,sasuke]; // may be replaced by a loop later by naming the question questioni maybe
@@ -55,33 +55,30 @@ let trivia = {
         trivia.state = "validating";
         if (answer === trivia.currentQuestion.correctAnswer){
             player.areAnswersCorrect.push(true);
-            console.log('congrats!');
             $("#questionScore").modal('show');
             $("#questionScoreTitle").empty().append('Congrats!');
             $("#questionScoreText").empty().append('You got it right!');
-            timeoutModal = window.setTimeout(trivia.goToNextQuestion,5000);
+            timeoutModal = window.setTimeout(trivia.goToNextQuestion.bind(trivia),2000);
         } else {
             player.areAnswersCorrect.push(false);
-            console.log('Too bad...');
             $("#questionScore").modal('show');
             $("#questionScoreTitle").empty().append('Too bad...');
             $("#questionScoreText").empty().append('The good answer was ' + trivia.currentQuestion.correctAnswer);
-            timeoutModal = window.setTimeout(trivia.goToNextQuestion,5000);
+            timeoutModal = window.setTimeout(trivia.goToNextQuestion.bind(trivia),2000);
         }
     },
     goToNextQuestion: function(){
         player.displayCurrentScore();
         $("#questionScore").modal('hide');
-        if (trivia.questionsPool.length === 0){
-            trivia.state = "finished";
-            console.log("game finished");
+        if (this.questionsPool.length === 0){
+            this.state = "finished";
             $("#questionScore").modal('show');
             $("#questionScoreTitle").empty().append(player.displayFinalScore());
             $("#questionScoreText").empty().append('Pretty impressive!');
             $('#dismissModal').empty().append('Restart');
         } else {
-            trivia.nextQuestion();
-            trivia.state = "waitingForAnswer";
+            this.nextQuestion();
+            this.state = "waitingForAnswer";
         }
         
     },
@@ -89,9 +86,9 @@ let trivia = {
         $('#timer').empty().append(n);
         n--;
         if(n > 0){
-        timeoutAnswer = setTimeout(function(){trivia.answerCountDown(n)},1000);
+        timeoutAnswer = setTimeout(this.answerCountDown.bind(trivia,n),1000);
         } else {
-            timeoutAnswer = setTimeout(function(){trivia.validateAnswer("");},1000);
+            timeoutAnswer = setTimeout(this.validateAnswer.bind(trivia,""),1000);
             // trivia.validateAnswer("");
         }
     },
@@ -100,17 +97,18 @@ let trivia = {
         $('#questionScore').modal('hide');
         $('#goodAnswers').empty().append('0');
         $('#totalAnswers').empty().append('0');
-        trivia.init();
-        trivia.nextQuestion();
+        this.init();
+        this.nextQuestion();
         player.init();
         
     }
 }
 
-
+// player groups the information relative to the use, mainly his answers, score etc
 let player = {
     currentAnswer: "",
     areAnswersCorrect: [], //we keep this array with booleans to count the score
+    // displayCurrentScore takes care of the top right score when called
     displayCurrentScore: function(){
         $('#totalAnswers').empty().append(this.areAnswersCorrect.length);
         let nbCorrectAnswers = 0;
