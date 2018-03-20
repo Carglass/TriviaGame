@@ -94,6 +94,7 @@ let trivia = {
             // reuse the modal window
             $("#questionScore").modal('show');
             $("#questionScoreTitle").empty().append(player.displayFinalScore());
+            // I could display different messages based on the score, but I am a nice guy, I want to people to feel encouraged ;)
             $("#questionScoreText").empty().append('Pretty impressive!');
             $('#dismissModal').empty().append('Restart');
         } else {
