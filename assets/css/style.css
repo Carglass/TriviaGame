@@ -474,6 +474,14 @@
     .sm-mt-20px{
         margin-top: 20px;
     }
+
+    .sm-h-auto{
+        height:auto;
+    }
+
+    .sm-br-0{
+        border-radius: 0%;
+    }
 }
 
 @media screen and (max-width: 640px){
