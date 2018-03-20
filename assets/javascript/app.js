@@ -30,7 +30,7 @@ let trivia = {
         this.answerCountDown(8);
     },
     init: function(){
-        this.questionsPool = [luffy,bakuman,ichigo,sasuke]; // may be replaced by a loop later by naming the question questioni maybe
+        this.questionsPool = [luffy,bakuman,ichigo,sasuke,L,WhiteBeard,Kenpachi,Gon,Urasawa];
         this.state = "waitingForAnswer";
     },
     displayCurrentQuestion: function(){
@@ -138,6 +138,11 @@ let luffy = new triviaQuestion("What is the name of the captain in One Piece?",f
 let bakuman = new triviaQuestion("Does Bakuman tell the story of a manga writer?",true,true);
 let ichigo = new triviaQuestion("Bleach's Hero is called Ichigo, what does it mean in Japanese?",false,'strawberry',['cherry','banana','orange','strawberry']);
 let sasuke = new triviaQuestion("Sasuke magic eyes are called Bakugan",true,false);
+let L = new triviaQuestion('Which of these characters is not a Death Note user?', false, 'L',['Light','Ryuk', 'L', 'Misa']);
+let WhiteBeard = new triviaQuestion("Which of these characters is not one of White Beard's captain?",false,'Shanks',['Ace','Falco','Shanks','Jozu']);
+let Gon = new triviaQuestion("Jin is Gon's dad in Hunter X Hunter?", true, true);
+let Kenpachi = new triviaQuestion("In Bleach, becoming 12th division captain is done via a duel to the death", true, false);
+let Urasawa = new triviaQuestion("Which of these manga is not from Urasawa-sensei?",false,'Death Note',['Monster','20th Century Boys','Death Note','Master Keaton']);
 
 //Utility
 function getRandomInt(max) {
